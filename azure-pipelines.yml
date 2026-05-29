@@ -26,3 +26,17 @@ stages:
           - script: |
               npm test
             displayName: 'Run tests'
+          - task: ArchiveFiles@2
+            inputs:
+              rootFolderOrFile: '$(Build.SourcesDirectory)'
+              includeRootFolder: false
+              archiveType: 'zip'
+              archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              replaceExistingArchive: true
+            displayName: 'Archive application'
+
+          - task: PublishPipelineArtifact@1
+            inputs:
+              artifactName: 'nodejs-app'
+              targetPath: '$(Build.ArtifactStagingDirectory)'
+            displayName: 'Publish pipeline artifact'
