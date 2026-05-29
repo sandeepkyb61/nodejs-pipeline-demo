@@ -57,7 +57,7 @@ stages:
           - task: AzureWebApp@1
             inputs:
               azureSubscription: 'azure-app-service-connection'
-              appType: 'webAppLinux'
+              appType: 'webApp'
               appName: 'nodejs-app-project'
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
             displayName: 'Deploy to Azure Web App'
