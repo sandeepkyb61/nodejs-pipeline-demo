@@ -3,7 +3,7 @@ const app = express();
 
 // Root route - returns a JSON greeting and status
 app.get('/', (req, res) => {
-  res.json({ message: 'Hello from Azure DevOps CI/CD Pipeline!', status: 'running' });
+  res.json({ message: 'Deployed automatically via Azure DevOps CI/CD!', status: 'running' });
 });
 
 // Health check route - returns current server health
