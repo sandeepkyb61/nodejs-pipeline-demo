@@ -40,3 +40,24 @@ stages:
               artifactName: 'nodejs-app'
               targetPath: '$(Build.ArtifactStagingDirectory)'
             displayName: 'Publish pipeline artifact'
+  - stage: Deploy
+    displayName: 'Deploy to Azure App Service'
+    dependsOn: Build
+    condition: succeeded()
+    jobs:
+      - job: DeployJob
+        displayName: 'Deploy to App Service'
+        steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifactName: 'nodejs-app'
+              targetPath: '$(Pipeline.Workspace)/drop'
+            displayName: 'Download artifact'
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: 'azure-app-service-connection'
+              appType: 'webAppLinux'
+              appName: 'nodejs-app-project'
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+            displayName: 'Deploy to Azure Web App'
