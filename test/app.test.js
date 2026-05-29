@@ -19,7 +19,7 @@ describe('App Routes', () => {
         res.on('end', () => {
           const body = JSON.parse(data);
           assert.strictEqual(res.statusCode, 200);
-          assert.strictEqual(body.message, 'Deployed automatically via Azure DevOps CI/CD!');
+          assert.strictEqual(body.message, 'Deployed automatically via Azure DevOps CI/CD!-new');
           assert.strictEqual(body.status, 'running');
           server.close();
           done();
